@@ -1,0 +1,36 @@
+html {
+	height: 100%;
+	background-color: #444;
+	box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1 {
+	text-align: center;
+	font-weight: normal;
+}
+
+#page {
+	width: 75%;
+	max-width: 800px;
+	margin: auto;
+	padding-top: 50px;
+
+	color: white;
+}
+
+#page p {
+	text-align: center;
+}
+
+nav {
+	height: 40px;
+	padding: 20px 0;
+	text-align: right;
+	list-style: none;
+}
+
+nav ul {padding: 0;}
+nav ul li {display: inline;}
+nav ul li + li {padding-left: 40px;}
