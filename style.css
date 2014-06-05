@@ -6,11 +6,6 @@ html {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-h1 {
-	text-align: center;
-	font-weight: normal;
-}
-
 #page {
 	width: 75%;
 	max-width: 800px;
@@ -20,17 +15,14 @@ h1 {
 	color: white;
 }
 
-#page p {
-	text-align: center;
-}
-
-nav {
-	height: 40px;
+#logo {
+	display: block;
+	width: 30%;
+	margin: 0 auto;
 	padding: 20px 0;
-	text-align: right;
-	list-style: none;
 }
 
-nav ul {padding: 0;}
-nav ul li {display: inline;}
-nav ul li + li {padding-left: 40px;}
+h1, #page p {
+	text-align: center;
+	font-weight: normal;
+}
