@@ -1,0 +1,10 @@
+# Ignore Sublime Text projects/workspaces and anything in /test
+*.sublime*
+test/**/*
+
+# Win/Mac crap
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
