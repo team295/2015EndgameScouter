@@ -8,3 +8,7 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
+
+# Other stuff
+.htaccess
+endgame/__pycache__/*
