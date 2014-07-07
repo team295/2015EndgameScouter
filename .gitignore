@@ -1,5 +1,6 @@
 # Python gitignores
 __pycache__/
+*.py[cod]
 
 # Ignore Sublime Text projects/workspaces and anything in /test
 *.sublime*
@@ -14,4 +15,4 @@ $RECYCLE.BIN/
 
 # Other stuff
 .htaccess
-# endgame/__pycache__/*
+.*.swp
