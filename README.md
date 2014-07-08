@@ -1,7 +1,8 @@
 # Endgame
 
-FRC Scouting application using Flask
+FRC scouting application using Flask
 
 ## Dependencies
 * Python 2.7
-* Flask
+* [Flask (with Jinja2 and Werkzeug)](http://flask.pocoo.org/)
+* [SQLAlchemy](http://www.sqlalchemy.org/)
