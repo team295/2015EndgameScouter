@@ -1,5 +1,5 @@
 from endgame import app
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from endgame.dbmodel import  User,db
 from sqlalchemy import exc
