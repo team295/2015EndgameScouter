@@ -1,5 +1,10 @@
-from dbcreate import db
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask import Flask
+
+app = Flask(__name__)
+app.config.from_object('config')
+
+db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -15,3 +20,5 @@ class User(db.Model):
         self.name = name
     def __repr__(self):
         return '<USER %r>' % self.username
+
+db.create_all()

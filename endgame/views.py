@@ -15,7 +15,7 @@ def _login():
 def _register():
 	message = None
 	if request.method == 'POST':
-           #try:
+           try:
                 u = request.form['username']
                 p = request.form['password']
                 n = request.form['name']
@@ -23,7 +23,7 @@ def _register():
                 db.session.add(newUser)
                 db.session.commit()
                 return redirect(url_for('/'))
-           #except exc.SQLAlchemyError:
-           #     message = 'Something went wrong'
+           except exc.SQLAlchemyError:
+                message = 'Something went wrong'
 	return render_template('register.html', message=message)
 
