@@ -1,5 +1,5 @@
-from flask.ext.sqlalchemy import SQLAlchemy
 from endgame import db
+from flask.ext.sqlalchemy import SQLAlchemy
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
