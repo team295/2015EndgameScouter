@@ -11,6 +11,15 @@ def home():
 def _login():
 	return render_template('login.html')
 
+@app.route('/admin')
+def _admin():
+    users = None
+	try:
+		users = list(User.query.all())    
+	catch:
+
+return render_template('admin.html', users = users )
+
 @app.route('/register', methods=['GET', 'POST'])
 def _register():
 	message = None
