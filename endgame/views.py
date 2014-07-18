@@ -14,11 +14,12 @@ def _login():
 @app.route('/admin')
 def _admin():
     users = None
-	try:
-		users = list(User.query.all())    
-	catch:
-
-return render_template('admin.html', users = users )
+    message = None
+    try:
+        users = list(User.query.all())
+    except exc.SQLAlchemyError:
+        message = 'Something went wrong'
+    return render_template('admin.html', users = users,message = message )
 
 @app.route('/register', methods=['GET', 'POST'])
 def _register():
