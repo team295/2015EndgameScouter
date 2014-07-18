@@ -1,5 +1,5 @@
 from endgame import app
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from endgame.dbmodel import  User,db
 from sqlalchemy import exc
@@ -10,6 +10,16 @@ def home():
 @app.route('/login')
 def _login():
 	return render_template('login.html')
+
+@app.route('/admin')
+def _admin():
+    users = None
+    message = None
+    try:
+        users = list(User.query.all())
+    except exc.SQLAlchemyError:
+        message = 'Something went wrong'
+    return render_template('admin.html', users = users,message = message )
 
 @app.route('/register', methods=['GET', 'POST'])
 def _register():
