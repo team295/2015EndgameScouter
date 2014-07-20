@@ -16,3 +16,7 @@ $RECYCLE.BIN/
 # Other stuff
 .htaccess
 .*.swp
+
+# For security, let's not push our databases
+*.db
+
