@@ -7,7 +7,7 @@ class User(db.Model):
 	admin    = db.Column(db.Boolean,    default=False)
 	approved = db.Column(db.Boolean,    default=False)
 	username = db.Column(db.String(80), unique=True)
-	password = db.Column(db.String(80), unique=True)
+	password = db.Column(db.String(80))
 
 	def __init__(self, name, username, password):
 		self.username = username
