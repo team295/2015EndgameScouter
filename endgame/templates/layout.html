@@ -5,7 +5,9 @@
 		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
-      <style>"*:before {content:'dickbutt'}"</style>
+	{% for m in get_flashed_messages() %}
+		<div class="flash">{{ m }}</div>
+	{% endfor %}
 	{% block body %} {% endblock body %}
 	</body>
 </html>
