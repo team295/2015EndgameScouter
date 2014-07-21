@@ -34,8 +34,17 @@ def _logout():
 	flash('Logged out.')
 	return redirect(url_for('_home'))
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def _admin():
+	if (request.method == 'POST'):
+		### print request.form
+		for t in request.form.items():
+			if 'approved' in t[0]:
+				id = int(t[0].split('_')[1])
+				ac = True if t[1] == 'y' else False
+				### print('{}:{}'.format(id, ac))
+				User.query.filter(User.id == id).update({'approved':ac})
+				db.session.commit()
 	users = []
 	try:
 		users = list(User.query.all())
