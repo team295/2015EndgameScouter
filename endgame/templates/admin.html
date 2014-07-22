@@ -19,6 +19,14 @@
 		<td>{{ user.approved }}</td>
 		<td>{{ user.username }}</td>
 		<td>{{ user.password }}</td>
+		{% if not user.approved %}
+		    <td>
+			    <form method=post action={{url_for('_admin')}}>
+		            <button type="submit">Approve</button>
+	                    <p hidden name="user">{{user.id}}</p>		    
+		        </form>    
+		    </td>
+		{% endif %}
 	</tr>
 	{% endfor %}
 	</table> 

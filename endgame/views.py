@@ -34,14 +34,25 @@ def _logout():
 	flash('Logged out.')
 	return redirect(url_for('_home'))
 
-@app.route('/admin')
+@app.route('/admin', methods = ['GET', 'POST'])
 def _admin():
-	users = []
-	try:
-		users = list(User.query.all())
-	except exc.SQLAlchemyError:
-		flash('There was a problem reading the users from the database.')
-	return render_template('admin.html', users=users)
+    if request.method == 'GET':
+        users = []
+        try:
+            users = list(User.query.all())
+        except exc.SQLAlchemyError:
+            flash('There was a problem reading the users from the database.')
+        return render_template('admin.html', users=users)
+    if request.method == 'POST':
+        try:
+            u = request.form['user']
+            print(u);
+            user = User.query.get(u)
+            user.approved = True
+            db.session.commit()
+            return redirect(url_for('_admin'))
+        except exc.SQLAlchemyError:
+            flash('There was an issue approving the user')
 
 @app.route('/register', methods=['GET', 'POST'])
 def _register():
