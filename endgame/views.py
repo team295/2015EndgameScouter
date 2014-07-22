@@ -72,22 +72,27 @@ def _register():
 
 @app.route('/settings',  methods=['GET','POST'])
 def _settings():
-    if session.get('logged_in'):
-        if request.method == 'POST': 
-            old = request.form['opassword']
-            newp1 = request.form['newp1']
-            newp2 = request.form['newp2']
-            username = session.get('username')
-            if newp1 != newp2:
-                flash('The new passwords are not the same. Please change them so they are.')
-            if User.query.filter(User.username == username, User.password == old) != None:
-                if newp1 == newp2:
-                    user = User.query.filter(User.username == username, User.password == old)
-                    user.password = newp1
-                    db.session.commit()
-                    return redirect(url_for('_login'))
-            else:
-                flash("Your old password was not correct. Please change it so that it is.")
-        return render_template('settings.html')
-    else:
-        return redirect(url_for('_home'))
+	if not session.get('logged_in'):
+		flash('You are not logged in.')
+		return redirect(url_for('_login'))
+	if request.method == 'POST':
+		if not session.get('logged_in'):
+			flash('You are not logged in.')
+			return redirect(url_for('_login'))
+		old = request.form['opassword']
+		newp1 = request.form['newp1']
+		newp2 = request.form['newp2']
+		username = session.get('username')
+		user = User.query.filter(User.username == username, User.password == old).first()
+		if newp1 != newp2:
+			flash('Your new passwords do not match.')
+		elif user == None:
+			flash('Your old password was incorrect.')
+		elif newp1 == newp2:
+			user.password = newp1
+			db.session.commit()
+			session.pop('logged_in', None)
+			flash('Your password was successfully changed. You can now login again.')
+			return redirect(url_for('_login'))
+	return render_template('settings.html')
+
