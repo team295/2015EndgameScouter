@@ -72,7 +72,7 @@ def _register():
 
 @app.route('/settings',  methods=['GET','POST'])
 def _settings():
-    if session.get('logged_in') == True:
+    if session.get('logged_in'):
         if request.method == 'POST': 
             old = request.form['opassword']
             newp1 = request.form['newp1']
