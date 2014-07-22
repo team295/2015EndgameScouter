@@ -65,3 +65,8 @@ def _register():
 			flash('There was a problem adding a user to the database.')
 	return render_template('register.html')
 
+@app.route('/settings',  methods=['GET','POST'])
+def _settings():
+    if request.method == 'POST': 
+        old = request.form['opassword']
+    return render_template('settings.html')

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Welcome {{user.name}}}</h3>
+
+<form method=post action={{url_for('_settings')}}>
+	<h3>Change password</h3>
+	<p>Current password</p>
+	<input name="opassword"> </input>
+	<p>New password</p>
+	<input name="password1"> </input>
+	<p>Confirm new password</p>
+	<input name="password2"> </input>
+</form>
+
+{% endblock %}
