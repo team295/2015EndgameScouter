@@ -6,7 +6,12 @@ from sqlalchemy import exc
 
 @app.route('/')
 def _home():
-	return render_template('home.html')
+    message = None
+    if session.get('logged_in') == True:
+        message = 'You are logged in as %s' % (session.get('username')) 
+    else:
+        message = 'You are not logged in yet.'
+    return render_template('home.html', message = message)
 
 @app.route('/login', methods=['GET', 'POST'])
 def _login():
@@ -67,6 +72,22 @@ def _register():
 
 @app.route('/settings',  methods=['GET','POST'])
 def _settings():
-    if request.method == 'POST': 
-        old = request.form['opassword']
-    return render_template('settings.html')
+    if session.get('logged_in') == True:
+        if request.method == 'POST': 
+            old = request.form['opassword']
+            newp1 = request.form['newp1']
+            newp2 = request.form['newp2']
+            username = session.get('username')
+            if newp1 != newp2:
+                flash('The new passwords are not the same. Please change them so they are.')
+            if User.query.filter(User.username == username, User.password == old) != None:
+                if newp1 == newp2:
+                    user = User.query.filter(User.username == username, User.password == old)
+                    user.password = newp1
+                    db.session.commit()
+                    return redirect(url_for('_login'))
+            else:
+                flash("Your old password was not correct. Please change it so that it is.")
+        return render_template('settings.html')
+    else:
+        return redirect(url_for('_home'))
