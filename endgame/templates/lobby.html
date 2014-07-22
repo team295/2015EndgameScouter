@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+	SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<div id=msgs></div>
+<a href=# id=handshake>Send handshake</a>
+
+<script type=text/javascript>
+	$(function() {
+		$('a#handshake').bind('click', function() {
+			$.getJSON(
+				SCRIPT_ROOT + '/handshake',
+				{handshake: 1},
+				function(data) {
+					alert(data);
+				}
+			);
+			return false;
+		});
+	});
+</script>
+{% endblock body %}
+

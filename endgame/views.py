@@ -1,5 +1,5 @@
 from endgame import app
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from endgame.dbmodel import *
 from sqlalchemy import exc
@@ -64,4 +64,16 @@ def _register():
 		except exc.SQLAlchemyError:
 			flash('There was a problem adding a user to the database.')
 	return render_template('register.html')
+
+@app.route('/scout/lobby')
+def _lobby():
+	if not session.get('logged_in'):
+		flash('Please log in to access this page.')
+		return redirect(url_for('_login'))
+	return render_template('lobby.html')
+
+@app.route('/handshake')
+def _handshake():
+	handshake = request.args.get('handshake', -1, type=int)
+	return jsonify(response=handshake + 1)
 
