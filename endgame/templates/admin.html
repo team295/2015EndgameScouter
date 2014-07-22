@@ -15,10 +15,11 @@
 			<tr>
 				<td>{{ user.id }}</td>
 				<td>{{ user.name }}</td>
-				<td>{{ user.admin }}</td>
 				<td>
-					<input type=radio name="approved_{{ user.id }}" value="y"{% if user.approved %} checked{% endif %}>
-					<input type=radio name="approved_{{ user.id }}" value="n"{% if not user.approved %} checked{% endif %}>
+					<input type="checkbox" name="admin_{{ user.id }}" {% if user.admin %} checked{% endif %}>
+				</td>
+				<td>
+					<input type="checkbox" name="approved_{{ user.id }}" {% if user.approved %} checked{% endif %}>
 				</td>
 				<td>{{ user.username }}</td>
 				<td>{{ user.password }}</td>

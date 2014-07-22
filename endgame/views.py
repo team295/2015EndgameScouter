@@ -36,15 +36,13 @@ def _logout():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def _admin():
-	if (request.method == 'POST'):
-		### print request.form
-		for t in request.form.items():
-			if 'approved' in t[0]:
-				id = int(t[0].split('_')[1])
-				ac = True if t[1] == 'y' else False
-				### print('{}:{}'.format(id, ac))
-				User.query.filter(User.id == id).update({'approved':ac})
-				db.session.commit()
+	if request.method == 'POST':
+		approved = [int(i.split('_')[1]) for (i, a) in request.form.items() if 'approved' in i]
+		admin = [int(i.split('_')[1]) for (i, a) in request.form.items() if 'admin' in i]
+		for u in User.query.all():
+			u.approved = u.id in approved
+			u.admin = u.id in admin
+		db.session.commit()
 	users = []
 	try:
 		users = list(User.query.all())
