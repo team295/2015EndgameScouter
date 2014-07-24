@@ -1,2 +1,4 @@
-from endgame import app
-app.run(debug=True)
+from endgame import app,socketio
+
+
+socketio.run(app)

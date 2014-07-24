@@ -1,4 +1,5 @@
-from endgame import app
+from endgame import app,socketio
+from flask.ext.socketio import SocketIO
 from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from endgame.dbmodel import *
@@ -72,8 +73,13 @@ def _lobby():
 		return redirect(url_for('_login'))
 	return render_template('lobby.html')
 
-@app.route('/handshake')
-def _handshake():
-	handshake = request.args.get('handshake', -1, type=int)
-	return jsonify(response=handshake + 1)
+@socketio.on('my event', namespace='/scout/lobby')
+def test_return():
+	print 'client connected : %s ' %s(session.get('username') )
+
+@socketio.on('join', namespace='/scout/lobby')
+def on_join(data):
+	username = data['username']
+	join_room(room)
+	send(username + 'has entered the room')
 

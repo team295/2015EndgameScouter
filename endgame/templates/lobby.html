@@ -1,26 +1,27 @@
 {% extends "layout.html" %}
+
 {% block body %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type=text/javascript>
-	SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+<script src="{{url_for('static',filename='jquery-2.1.1.min.js')}}"></script>
+<script>
+	$(document).ready(function()
+	{
+		var socket = io.connect('http://' + document.domain + ':' + location.port + '/scout/lobby');
+		socket.on('connect', function()
+		{
+			socket.emit('my event', {data:'I\'m connected!'});
+		}
+		);				
+
+	})
 </script>
+<form>
+	<p id="message">You are not in yet</p>
+	<button>Join</button>
+	<button>Quit</button>
 
-<div id=msgs></div>
-<a href=# id=handshake>Send handshake</a>
+</form>
+<ol id="activeusers">
+</ol>	
+<div id="log"></div>
 
-<script type=text/javascript>
-	$(function() {
-		$('a#handshake').bind('click', function() {
-			$.getJSON(
-				SCRIPT_ROOT + '/handshake',
-				{handshake: 1},
-				function(data) {
-					alert(data);
-				}
-			);
-			return false;
-		});
-	});
-</script>
-{% endblock body %}
-
+{% endblock %}
