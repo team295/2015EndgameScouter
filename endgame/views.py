@@ -80,6 +80,7 @@ def test_return():
 @socketio.on('join', namespace='/scout/lobby')
 def on_join(data):
 	username = data['username']
+	print 'user %s joined' %s(username)
 	socket.emit('adduser', {'data':username} )
 
 

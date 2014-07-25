@@ -5,16 +5,23 @@
 <script>
 	$(document).ready(function()
 	{
+		$("form#quit").css("display", "none");	
+		$("form#quit").hide();	
 		var socket = io.connect('http://' + document.domain + ':' + location.port + '/scout/lobby');
       	socket.on('my response',function(msg){
           $("#log").append('<p> Received : ' + msg.data + '</p>');
         });
         socket.on('adduser',function(msg)
-            {
+            
+			{
+			  $("form#quit").show();		
+			  $("form#join").hide();
               $("#activeusers").append('<li id='msg.data'>' + msg.data + '</li>');
             });
         socket.on('removeuser',function(msg)
             {
+			  $("form#quit").hide();		
+			  $("form#join").show();	
               $("#activeusers").remove("#" + msg.data);
             });
         $("form#join").click(function() {
