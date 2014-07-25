@@ -80,6 +80,10 @@ def test_return():
 @socketio.on('join', namespace='/scout/lobby')
 def on_join(data):
 	username = data['username']
-	join_room(room)
-	send(username + 'has entered the room')
+	socket.emit('adduser', {'data':username} )
 
+
+@socketio.on('quit', namespace='/scout/lobby')
+def on_quit(data):
+	username = session.get['username']
+	socket.emit('removeuser', {'data':username} )

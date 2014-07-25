@@ -11,18 +11,18 @@
         });
         socket.on('adduser',function(msg)
             {
-              $("#activeusers").append('<li id=' msg.data'>'msg.data'</li>');
+              $("#activeusers").append('<li id='msg.data'>' + msg.data + '</li>');
             });
-       socket.on('removeuser',function(user)
+        socket.on('removeuser',function(msg)
             {
-				
+              $("#activeusers").remove("#" + msg.data);
             });
-      $("form#join").click(function() {
-        socket.emit('join', {data:'Joining List'});
-      });
-      $("form#quit").click(function(){
-        socket.emit('quit',{data:'Leaving List'});
-      });
+        $("form#join").click(function() {
+          socket.emit('join', {data:'Joining List'});
+        });
+        $("form#quit").click(function(){
+          socket.emit('quit',{data:'Leaving List'});
+        });
 	});
 </script>
 <form>
@@ -36,3 +36,4 @@
 <div id="log"></div>
 
 {% endblock %}
+
