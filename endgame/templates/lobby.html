@@ -6,18 +6,29 @@
 	$(document).ready(function()
 	{
 		var socket = io.connect('http://' + document.domain + ':' + location.port + '/scout/lobby');
-		socket.on('connect', function()
-		{
-			socket.emit('my event', {data:'I\'m connected!'});
-		}
-		);				
-
-	})
+      	socket.on('my response',function(msg){
+          $("#log").append('<p> Received : ' + msg.data + '</p>');
+        });
+        socket.on('adduser',function(msg)
+            {
+              $("#activeusers").append('<li id=' msg.data'>'msg.data'</li>');
+            });
+       socket.on('removeuser',function(user)
+            {
+				
+            });
+      $("form#join").click(function() {
+        socket.emit('join', {data:'Joining List'});
+      });
+      $("form#quit").click(function(){
+        socket.emit('quit',{data:'Leaving List'});
+      });
+	});
 </script>
 <form>
 	<p id="message">You are not in yet</p>
-	<button>Join</button>
-	<button>Quit</button>
+	<button id="join">Join</button>
+	<button id="quit">Quit</button>
 
 </form>
 <ol id="activeusers">
