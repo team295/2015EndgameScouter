@@ -1,0 +1,84 @@
+{
+	"year": 2012,
+	"name": "rebound-rumble",
+	"title": "Rebound Rumble",
+	"allies": 3,
+	"sections": [
+		{
+			"name": "teleoperated",
+			"title": "Teleoperated",
+			"desc": "Robot performance during the teleoperated period.",
+			"data": [
+				{
+					"name": "highScored",
+					"title": "High goals scored",
+					"desc": "Goals scored in the high goal.",
+					"type": "number",
+					"min": 0
+				},
+				{
+					"name": "midScored",
+					"title": "Middle goals scored",
+					"desc": "Goals scored in the middle row goals.",
+					"type": "number"
+				},
+				{
+					"name": "lowScored",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "endgame",
+			"title": "Endgame",
+			"desc": "Robot performance during the endgame period.",
+			"data": [
+				{
+					"name": "robotsBalanced",
+					"title": "Robots balanced on bridge",
+					"type": "slider",
+					"min": 0,
+					"max": 3,
+					"step": 1
+				},
+				{
+					"name": "balanceTime",
+					"title": "Time to balance",
+					"desc": "Time taken for robot to balance, in seconds.",
+					"type": "number",
+					"min": 0
+				}
+			]
+		},
+		{
+			"name": "misc",
+			"title": "Miscellaneous",
+			"desc": "Other robot statistics.",
+			"data": [
+				{
+					"name": "offRating",
+					"title": "Offensive rating",
+					"type": "slider",
+					"min": 1,
+					"max": 5,
+					"step": 1
+				},
+				{
+					"name": "defRating",
+					"title": "Defensive rating",
+					"type": "slider",
+					"min": 1,
+					"max": 5,
+					"step": 1
+				},
+				{
+					"name": "canCrossBridge",
+					"title": "Can cross bridge",
+					"type": "boolean",
+					"value": false
+				}
+			]
+		}
+	]
+}
+
