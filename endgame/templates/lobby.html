@@ -1,26 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
 <script type=text/javascript>
-	SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	$(document).ready(function() {
+		namespace = '/lobby';
+
+		var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+		socket.on('connect', function() {
+			socket.emit('my event', {data: 'User {{ session.username }} connected'});
+		});
+		socket.on('response', function(msg) {
+			$('#msgs').append('<p>Msg' + msg.count + ': ' + msg.data);
+		});
+		console.log('Socket loaded.');
+	});
 </script>
 
 <div id=msgs></div>
-<a href=# id=handshake>Send handshake</a>
 
-<script type=text/javascript>
-	$(function() {
-		$('a#handshake').bind('click', function() {
-			$.getJSON(
-				SCRIPT_ROOT + '/handshake',
-				{handshake: 1},
-				function(data) {
-					alert(data);
-				}
-			);
-			return false;
-		});
-	});
-</script>
 {% endblock body %}
 

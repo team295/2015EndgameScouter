@@ -1,8 +1,10 @@
-from endgame import app
+from endgame import app, socketio
 from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from endgame.dbmodel import *
 from sqlalchemy import exc
+
+from flask.ext.socketio import emit
 
 @app.route('/')
 def _home():
@@ -24,7 +26,7 @@ def _login():
 				return redirect(url_for('_home'))
 			else:
 				flash('Incorrect username or password.')
-		except exc.SQlAlchemyError:
+		except exc.SQLAlchemyError:
 			flash('There was a problem accessing the database.')
 	return render_template('login.html')
 
@@ -72,8 +74,7 @@ def _lobby():
 		return redirect(url_for('_login'))
 	return render_template('lobby.html')
 
-@app.route('/handshake')
-def _handshake():
-	handshake = request.args.get('handshake', -1, type=int)
-	return jsonify(response=handshake + 1)
+@socketio.on('my event')
+def test_message(message):
+	emit('response', {'data': 'recv by server'})
 
