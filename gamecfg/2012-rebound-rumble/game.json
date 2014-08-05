@@ -5,25 +5,25 @@
 	"allies": 3,
 	"sections": [
 		{
-			"name": "teleoperated",
+			"name": "tele",
 			"title": "Teleoperated",
 			"desc": "Robot performance during the teleoperated period.",
 			"data": [
 				{
-					"name": "highScored",
+					"name": "high-scored",
 					"title": "High goals scored",
 					"desc": "Goals scored in the high goal.",
 					"type": "number",
 					"min": 0
 				},
 				{
-					"name": "midScored",
+					"name": "mid-scored",
 					"title": "Middle goals scored",
 					"desc": "Goals scored in the middle row goals.",
 					"type": "number"
 				},
 				{
-					"name": "lowScored",
+					"name": "low-scored",
 					"type": "number"
 				}
 			]
@@ -34,15 +34,16 @@
 			"desc": "Robot performance during the endgame period.",
 			"data": [
 				{
-					"name": "robotsBalanced",
+					"name": "robots-balanced",
 					"title": "Robots balanced on bridge",
-					"type": "slider",
+					"type": "number",
+					"display": "slider",
 					"min": 0,
 					"max": 3,
 					"step": 1
 				},
 				{
-					"name": "balanceTime",
+					"name": "balance-time",
 					"title": "Time to balance",
 					"desc": "Time taken for robot to balance, in seconds.",
 					"type": "number",
@@ -56,23 +57,25 @@
 			"desc": "Other robot statistics.",
 			"data": [
 				{
-					"name": "offRating",
+					"name": "off-rating",
 					"title": "Offensive rating",
-					"type": "slider",
+					"type": "number",
+					"display": "slider",
 					"min": 1,
 					"max": 5,
 					"step": 1
 				},
 				{
-					"name": "defRating",
+					"name": "def-rating",
 					"title": "Defensive rating",
-					"type": "slider",
+					"type": "number",
+					"display": "slider",
 					"min": 1,
 					"max": 5,
 					"step": 1
 				},
 				{
-					"name": "canCrossBridge",
+					"name": "can-cross-bridge",
 					"title": "Can cross bridge",
 					"type": "boolean",
 					"value": false
